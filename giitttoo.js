@@ -20,6 +20,7 @@ exec(`git add . && git commit -m "${commitMessage}" && git push`, (error, stdout
   }
   if (error) {
     // Exit with the error code provided by the Git command
+    console.log(error)
     process.exit(error.code);
   }
 });
