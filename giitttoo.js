@@ -9,13 +9,17 @@ if (!commitMessage) {
   process.exit(1);
 }
 
-exec('git add . && git commit -m "' + commitMessage + '" && git push', (error, stdout, stderr) => {
-  if (error) {
-    console.error(`Error: ${error.message}`);
-    return;
-  }
+exec(`git add . && git commit -m "${commitMessage}" && git push`, (error, stdout, stderr) => {
   if (stderr) {
-    console.error(`Stderr: ${stderr}`);
+    // Forward stderr to the console, which includes Git's default error messages
+    console.error(stderr);
   }
-  console.log(`Stdout: ${stdout}`);
+  if (stdout) {
+    // Log stdout, which includes the standard output from Git
+    console.log(stdout);
+  }
+  if (error) {
+    // Exit with the error code provided by the Git command
+    process.exit(error.code);
+  }
 });
