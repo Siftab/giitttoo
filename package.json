@@ -1,0 +1,14 @@
+{
+  "name": "giitttoo",
+  "version": "1.0.3",
+  "description": "A simple script to automate git add, commit, and push",
+  "main": "giitttoo.js",
+  "bin": {
+    "giitttoo": "./giitttoo.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
