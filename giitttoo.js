@@ -11,24 +11,31 @@ if (!commitMessage) {
 }
 
 try {
+  // Switch to the specified branch
+  execSync(`git checkout ${branch}`, { encoding: 'utf-8' });
+  console.log(`Switched to branch ${branch}`);
 
-
-  // Shifting branch on demand\
-  if(branch){
-    execSync(`git checkout ${branch}`, { encoding: 'utf-8' });
-    console.log(`swicthed to ${branch}`)
-    }
   // Execute git add
   execSync('git add .', { encoding: 'utf-8' });
   console.log('Files added successfully.');
 
-  // Execute git commit
-  execSync(`git commit -m "${commitMessage}"`, { encoding: 'utf-8' });
-  console.log('Changes committed successfully.');
+  // Execute git commit and handle "nothing to commit" scenario
+  try {
+    const commitResult = execSync(`git commit -m "${commitMessage}"`, { encoding: 'utf-8' });
+    console.log('Changes committed successfully.');
+    console.log(commitResult);
+  } catch (commitError) {
+    if (commitError.stderr.toString().includes('nothing to commit')) {
+      console.error('Nothing to commit, working tree clean.');
+    } else {
+      throw commitError;
+    }
+    process.exit(1);
+  }
 
   // Execute git push
-  const result = execSync(`git push origin ${branch}`, { encoding: 'utf-8' });
-  console.log(result);
+  const pushResult = execSync(`git push origin ${branch}`, { encoding: 'utf-8' });
+  console.log(pushResult);
 } catch (error) {
   // Log any errors and exit with the error code
   console.error(error.stderr.toString());
