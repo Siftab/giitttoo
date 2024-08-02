@@ -1,10 +1,10 @@
 {
-  "name": "giitttoo",
-  "version": "1.0.3",
+  "name": "giittoo",
+  "version": "2.0.0",
   "description": "A simple script to automate git add, commit, and push",
-  "main": "giitttoo.js",
+  "main": "giittoo.js",
   "bin": {
-    "giitttoo": "./giitttoo.js"
+    "giittoo": "./giittoo.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
