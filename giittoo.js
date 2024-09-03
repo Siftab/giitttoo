@@ -9,10 +9,7 @@ const command = args[0];
 const commitMessage = args.slice(1).join(' ') || 'Initial commit'; // Capture all remaining arguments as commit message
 const branch = args[2] || 'main';
 
-console.log('Arguments:', args);
-console.log('Command:', command);
-console.log('Commit Message:', commitMessage);
-console.log('Branch:', branch);
+
 
 if (command === 'setup') {
   const repositoryUrl = args[1];
