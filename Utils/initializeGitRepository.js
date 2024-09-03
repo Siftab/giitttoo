@@ -14,6 +14,12 @@ export function initializeGitRepository(remoteUrl) {
 
   // Initialize the git repository
   executeCommand('git init');
+   // Check for files in the directory
+   const files = fs.readdirSync(process.cwd());
+   if (files.length === 0) {
+     console.log(chalk.yellow('No files to add. Create or copy files and run `giittoo` again.'));
+     process.exit(1);
+   }
   executeCommand('git add .');
   executeCommand(`git commit -m "initializing"`);
   executeCommand('git branch -M main');

@@ -7,12 +7,12 @@ import chalk from 'chalk';
 const args = process.argv.slice(2);
 const command = args[0];
 const repositoryUrl = args[1];
-const commitMessage = args[2] || 'Initial commit';
+const commitMessage = args[2] || 'Initial commit'; // Default commit message if not provided
 const branch = args[3] || 'main';
 
-if (command === '-c' && repositoryUrl) {
+if (command === 'setup' && repositoryUrl) {
   initializeGitRepository(repositoryUrl);
-} else if (commitMessage) {
+} else if (command === '-c') { // Updated to '-c' for add, commit, push
   performGitCommands(commitMessage, branch);
 } else {
   console.error(chalk.red('Invalid command or missing arguments.'));

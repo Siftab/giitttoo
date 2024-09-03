@@ -1,7 +1,8 @@
 import { execSync } from 'child_process';
-// import { executeCommand } from './executeCommand.js';
 import chalk from 'chalk';
 import { executeCommand } from './executeCommand.js';
+
+const CHECKMARK = '\u2713'; // Define checkmark as a constant
 
 export function performGitCommands(commitMessage, branch) {
   try {
@@ -10,17 +11,17 @@ export function performGitCommands(commitMessage, branch) {
 
     if (currentBranch !== branch) {
       // Switch to the specified branch
-      console.log(chalk.green(`Switching to branch ${branch}...`));
+      console.log(chalk.green(`Switching to branch => ${branch}...`));
       executeCommand(`git checkout ${branch}`);
-      console.log(chalk.green(`Switched to branch ${branch}`));
+      console.log(chalk.green(`Switched to branch ==> ${branch} ${CHECKMARK} ${CHECKMARK} ${CHECKMARK}`));
     } else {
-      console.log(chalk.green(`Already on branch ${branch}`));
+      console.log(chalk.green(`Current branch ==> ${branch}`));
     }
 
     // Execute git add
-    console.log(chalk.green('Adding changes...'));
+    console.log(chalk.green(`Adding changes...`))
     executeCommand('git add .');
-    console.log(chalk.green('Files added successfully.'));
+    console.log(chalk.green(`Files added successfully. ${CHECKMARK}`));
 
     // Execute git commit and handle "nothing to commit" scenario
     console.log(chalk.green('Committing changes...'));
