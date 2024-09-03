@@ -11,6 +11,12 @@ const commitMessage = args.slice(2).join(' ') || 'Initial commit'; // Default co
 const branch = args[3] || 'main';
 console.log('Arguments:', args);
 console.log('Commit Message:', commitMessage);
+console.log('Arguments:', args);
+console.log('Command:', command);
+console.log('Repository URL:', repositoryUrl);
+console.log('Commit Message:', commitMessage);
+console.log('Branch:', branch);
+
 
 
 if (command === 'setup' && repositoryUrl) {
