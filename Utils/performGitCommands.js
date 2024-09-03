@@ -11,8 +11,7 @@ export function performGitCommands(commitMessage, branch) {
     const currentBranch = executeCommand('git branch --show-current').trim();
 
     if (currentBranch !== branch) {
-      // Switch to the specified branch
-      console.log(chalk.green(`Switching to branch ==> ${branch}...`));
+      console.log(chalk.green(`Switching to branch => ${branch}...`));
       executeCommand(`git checkout ${branch}`);
       console.log(chalk.green(`Switched to branch ==> ${branch} ${checkmark}`));
     } else {
@@ -24,17 +23,17 @@ export function performGitCommands(commitMessage, branch) {
     executeCommand('git add .');
     console.log(chalk.green(`Files added successfully ${checkmark}`));
 
-    // Execute git commit and handle "nothing to commit" scenario
+    // Execute git commit with provided commit message
     console.log(chalk.green('Committing changes...'));
     try {
       const commitResult = execSync(`git commit -m "${commitMessage}"`, { encoding: 'utf-8' });
-      console.log(chalk.green(`Changes committed successfully ${checkmark}`));
+      console.log(chalk.green('Changes committed successfully.'));
       console.log(chalk.yellow(commitResult));
     } catch (commitError) {
       const errorOutput = commitError.stdout || commitError.stderr || commitError.message;
       if (errorOutput.includes('nothing to commit')) {
         console.error(chalk.red(`Nothing to commit, working tree clean ${heavyCrossSign}`));
-        process.exit(1); // Exit with status 1 to indicate nothing was committed
+        process.exit(1);
       } else {
         console.error(chalk.red(`Commit failed: ${errorOutput.toString()} ${heavyCrossSign}`));
         process.exit(1);
@@ -44,10 +43,9 @@ export function performGitCommands(commitMessage, branch) {
     // Execute git push
     console.log(chalk.green('Pushing changes...'));
     const pushResult = executeCommand(`git push origin ${branch}`);
-    console.log(chalk.green(` pushed successfully ${checkmark}`));
+    console.log(chalk.green(`Code pushed successfully ${checkmark}`));
     console.log(chalk.yellow(pushResult));
   } catch (error) {
-    // Log any errors and exit with the error code
     const errorOutput = error.stdout || error.stderr || error.message;
     console.error(chalk.red(`Unexpected error: ${errorOutput.toString()} ${heavyCrossSign}`));
     process.exit(1);
