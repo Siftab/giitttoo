@@ -28,7 +28,7 @@ export function performGitCommands(commitMessage, branch) {
     console.log(chalk.green('Committing changes...'));
     try {
       const commitResult = execSync(`git commit -m "${commitMessage}"`, { encoding: 'utf-8' });
-      console.log(chalk.green('Changes committed successfully.'));
+      console.log(chalk.green(`Changes committed successfully ${checkmark}`));
       console.log(chalk.yellow(commitResult));
     } catch (commitError) {
       const errorOutput = commitError.stdout || commitError.stderr || commitError.message;
@@ -44,7 +44,7 @@ export function performGitCommands(commitMessage, branch) {
     // Execute git push
     console.log(chalk.green('Pushing changes...'));
     const pushResult = executeCommand(`git push origin ${branch}`);
-    console.log(chalk.green(`Code pushed successfully ${checkmark}`));
+    console.log(chalk.green(` pushed successfully ${checkmark}`));
     console.log(chalk.yellow(pushResult));
   } catch (error) {
     // Log any errors and exit with the error code
